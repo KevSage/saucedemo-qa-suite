@@ -6,7 +6,7 @@ class LoginPage(BasePage):
     super().__init__(page)
     self.username_field: Locator = page.get_by_test_id("username")
     self.password_field: Locator = page.get_by_test_id("password")
-    self.login_button: Locator = page.get_by_test_id("login-buttton")
+    self.login_button: Locator = page.get_by_test_id("login-button")
     self.error_message: Locator = page.get_by_test_id("error")
 
   def login(self, username: str, password: str):
