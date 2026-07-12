@@ -25,3 +25,12 @@ class InventoryPage(BasePage):
     if badge.count() == 0:
       return 0
     return int(badge.text_content())
+
+  def get_product_details(self, card: Locator) -> dict:
+    product_details = {}
+    product_details['name'] = card.get_by_test_id("inventory-item-name").text_content()
+    product_details['description'] = card.get_by_test_id("inventory-item-desc").text_content()
+    product_details['price'] = float(card.get_by_test_id("inventory-item-price").text_content().replace("$", ""))    
+    product_details['image'] = card.get_by_role("img").get_attribute('src')
+    return product_details
+  
