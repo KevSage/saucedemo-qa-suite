@@ -16,16 +16,16 @@ This document exists for two purposes: it's genuine content for the final summar
 
 **Cart persistence and removal flows** (TC-3.3, TC-3.4). Verified manually and confirmed working correctly; not automated, as they weren't identified as high-risk findings requiring regression protection.
 
-## Infrastructure/Engineering Additions Considered
+## Infrastructure/Engineering Additions
 
-**Cross-browser execution** (Chromium, Firefox, WebKit) — Playwright supports this with minimal config; not yet added, worth doing if time allows as a low-cost way to demonstrate broader tooling awareness without expanding the _number_ of test cases.
+**Cross-browser execution** (Chromium, Firefox, WebKit) — **completed.** Verified locally (all 12 test results passing across all three engines) and confirmed running cleanly in CI. Run via `pytest tests/specs/ -v --browser chromium --browser firefox --browser webkit` (see README).
 
-**CI integration** (GitHub Actions or equivalent) — running the suite automatically on push/PR, with report artifacts uploaded. High-value, low-cost addition; doesn't add test cases, just execution infrastructure around the existing ones.
+**CI integration** (GitHub Actions) — **completed.** Runs the full suite cross-browser on every push, generates an HTML report, and uploads it as a build artifact. See `.github/workflows/`.
 
-**Trace/video/screenshot capture on failure** — Playwright's built-in `trace`/`video`/`screenshot` config options, providing rich debugging evidence for any test failure without adding new tests.
+**Trace/video/screenshot capture on failure** — not yet added. Playwright's built-in `trace`/`video`/`screenshot` config options would provide rich debugging evidence for any test failure without adding new tests. A trace of the `problem_user` checkout defect specifically would be a compelling, visual piece of evidence for the bug report — reviewed locally during development but not committed as a repo artifact.
 
 **Performance testing** — noted from exploratory testing (`performance_glitch_user` shows real, measurable delays on login/sort/navigation). Not functionally tested here since it's a non-functional concern; would use a dedicated tool (e.g., Playwright's own timing APIs, or a proper load-testing tool) in a fuller engagement.
 
-## Why These Were Deliberately Excluded, Not Forgotten
+## Why the Remaining Items Were Deliberately Excluded, Not Forgotten
 
-The assignment scope is 2-3 automated test cases. Every item above is a legitimate, considered piece of engineering judgment — deliberately not built, so the delivered suite stays small, explainable, and squarely matched to what was actually asked, rather than expanding because it was _possible_ to expand it. This document is the evidence that the scope discipline was a choice, not an oversight.
+The assignment scope is 2-3 automated test cases. Every test-coverage item above is a legitimate, considered piece of engineering judgment — deliberately not built, so the delivered suite stays small, explainable, and squarely matched to what was actually asked, rather than expanding because it was _possible_ to expand it. Cross-browser execution and CI integration are the exception: both were low-cost enough, and independent of test-case count, to complete rather than defer. This document is the evidence that the scope discipline throughout was a choice, not an oversight.
