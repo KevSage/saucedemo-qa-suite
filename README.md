@@ -2,7 +2,13 @@
 
 # Setup Instructions
 
-# Running Tests
+## Running Tests
+
+Standard (Chromium only):
+pytest tests/specs/ -v
+
+Cross-browser (Chromium, Firefox, WebKit):
+pytest tests/specs/ -v --browser chromium --browser firefox --browser webkit
 
 # Project Structure
 
